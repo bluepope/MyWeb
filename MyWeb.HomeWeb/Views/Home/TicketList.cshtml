@@ -1,4 +1,15 @@
-﻿<div class="row">
+﻿@model List<TicketModel>
+@{ 
+    int ticket_id = 0;
+    string title = "";
+
+    if (Model?.Count > 0)
+    {
+        ticket_id = Model[0].Ticket_Id;
+        title = Model[0].Title;
+    }
+}
+<div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -55,229 +66,46 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach (var ticket in Model)
+                            {
                             <tr>
-                                <td><span class="badge badge-light-warning">In Progress</span></td>
-                                <td>
-                                    <a href="javascript:void(0)" class="font-weight-medium link">
-                                        Elegant
-                                        Theme
-                                        Side Menu Open OnClick
-                                    </a>
-                                </td>
-                                <td><a href="javascript:void(0)" class="font-bold link">276377</a></td>
-                                <td>Elegant Admin</td>
-                                <td>Eric Pratt</td>
-                                <td>2018/05/01</td>
-                                <td>Fazz</td>
+                                <td>@ticket.Status</td>
+                                <td>@ticket.Title</td>
+                                <td>@ticket.Ticket_Id</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
-                            <tr>
-                                <td><span class="badge badge-light-danger">Closed</span></td>
-                                <td>
-                                    <a href="javascript:void(0)" class="font-weight-medium link">
-                                        AdminX
-                                        Theme
-                                        Side Menu Open OnClick
-                                    </a>
-                                </td>
-                                <td><a href="javascript:void(0)" class="font-bold link">1234251</a></td>
-                                <td>AdminX Admin</td>
-                                <td>Nirav Joshi</td>
-                                <td>2018/05/11</td>
-                                <td>Steve</td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge badge-light-success">Opened</span></td>
-                                <td>
-                                    <a href="javascript:void(0)"
-                                       class="font-weight-medium link">
-                                        Admin-Pro
-                                        Theme Side Menu Open OnClick
-                                    </a>
-                                </td>
-                                <td><a href="javascript:void(0)" class="font-bold link">1020345</a></td>
-                                <td>Admin-Pro</td>
-                                <td>Vishal Bhatt</td>
-                                <td>2018/04/01</td>
-                                <td>John</td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge badge-light-warning">In Progress</span></td>
-                                <td>
-                                    <a href="javascript:void(0)" class="font-weight-medium link">
-                                        Elegant
-                                        Theme
-                                        Side Menu Open OnClick
-                                    </a>
-                                </td>
-                                <td><a href="javascript:void(0)" class="font-bold link">7810203</a></td>
-                                <td>Elegant Admin</td>
-                                <td>Eric Pratt</td>
-                                <td>2018/01/01</td>
-                                <td>Fazz</td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge badge-light-warning">In Progress</span></td>
-                                <td>
-                                    <a href="javascript:void(0)" class="font-weight-medium link">
-                                        AdminX
-                                        Theme
-                                        Side Menu Open OnClick
-                                    </a>
-                                </td>
-                                <td><a href="javascript:void(0)" class="font-bold link">2103450</a></td>
-                                <td>AdminX Admin</td>
-                                <td>Nirav Joshi</td>
-                                <td>2018/05/01</td>
-                                <td>John</td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge badge-light-warning">In Progress</span></td>
-                                <td>
-                                    <a href="javascript:void(0)"
-                                       class="font-weight-medium link">
-                                        Admin-Pro
-                                        Theme Side Menu Open OnClick
-                                    </a>
-                                </td>
-                                <td><a href="javascript:void(0)" class="font-bold link">2140530</a></td>
-                                <td>Admin-Pro</td>
-                                <td>Vishal Bhatt</td>
-                                <td>2018/07/01</td>
-                                <td>Steve</td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge badge-light-success">Opened</span></td>
-                                <td>
-                                    <a href="javascript:void(0)" class="font-weight-medium link">
-                                        Elegant
-                                        Theme
-                                        Side Menu Open OnClick
-                                    </a>
-                                </td>
-                                <td><a href="javascript:void(0)" class="font-bold link">4500123</a></td>
-                                <td>Elegant Admin</td>
-                                <td>Eric Pratt</td>
-                                <td>2018/05/10</td>
-                                <td>Fazz</td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge badge-light-danger">Closed</span></td>
-                                <td>
-                                    <a href="javascript:void(0)" class="font-weight-medium link">
-                                        Elegant
-                                        Theme
-                                        Side Menu Open OnClick
-                                    </a>
-                                </td>
-                                <td><a href="javascript:void(0)" class="font-bold link">1230450</a></td>
-                                <td>Elegant Admin</td>
-                                <td>Eric Pratt</td>
-                                <td>2018/05/14</td>
-                                <td>John</td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge badge-light-danger">Closed</span></td>
-                                <td>
-                                    <a href="javascript:void(0)" class="font-weight-medium link">
-                                        AdminX
-                                        Theme
-                                        Side Menu Open OnClick
-                                    </a>
-                                </td>
-                                <td><a href="javascript:void(0)" class="font-bold link">1240503</a></td>
-                                <td>AdminX Admin</td>
-                                <td>Nirav Joshi</td>
-                                <td>2018/02/01</td>
-                                <td>Steve</td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge badge-light-success">Opened</span></td>
-                                <td>
-                                    <a href="javascript:void(0)"
-                                       class="font-weight-medium link">
-                                        Admin-Pro
-                                        Theme Side Menu Open OnClick
-                                    </a>
-                                </td>
-                                <td><a href="javascript:void(0)" class="font-bold link">1250304</a></td>
-                                <td>Admin-Pro</td>
-                                <td>Vishal Bhatt</td>
-                                <td>2018/05/21</td>
-                                <td>Fazz</td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge badge-light-success">Opened</span></td>
-                                <td>
-                                    <a href="javascript:void(0)" class="font-weight-medium link">
-                                        Elegant
-                                        Theme
-                                        Side Menu Open OnClick
-                                    </a>
-                                </td>
-                                <td><a href="javascript:void(0)" class="font-bold link">1470250</a></td>
-                                <td>Elegant Admin</td>
-                                <td>Eric Pratt</td>
-                                <td>2018/05/11</td>
-                                <td>John</td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge badge-light-danger">Closed</span></td>
-                                <td>
-                                    <a href="javascript:void(0)"
-                                       class="font-weight-medium link">
-                                        Admin-Pro
-                                        Theme Side Menu Open OnClick
-                                    </a>
-                                </td>
-                                <td><a href="javascript:void(0)" class="font-bold link">1450023</a></td>
-                                <td>Admin-Pro</td>
-                                <td>Vishal Bhatt</td>
-                                <td>2018/05/13</td>
-                                <td>Steve</td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge badge-light-warning">In Progress</span></td>
-                                <td>
-                                    <a href="javascript:void(0)" class="font-weight-medium link">
-                                        AdminX
-                                        Theme
-                                        Side Menu Open OnClick
-                                    </a>
-                                </td>
-                                <td><a href="javascript:void(0)" class="font-bold link">1420530</a></td>
-                                <td>AdminX Admin</td>
-                                <td>Nirav Joshi</td>
-                                <td>2018/10/01</td>
-                                <td>Fazz</td>
-                            </tr>
+                            }
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Status</th>
-                                <th>Title</th>
-                                <th>ID</th>
-                                <th>Product</th>
-                                <th>Created by</th>
-                                <th>Date</th>
-                                <th>Agent</th>
-                            </tr>
-                        </tfoot>
                     </table>
-                    <ul class="pagination float-right">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1">Previous</a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
+                    <!--
+    <ul class="pagination float-right">
+        <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+        </li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+        </li>
+    </ul>
+    -->
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<div>
+    <form id="form1" method="post" action="/home/ticketchange">
+        <input name="ticket_id" type="text" value="@ticket_id" />
+        <input name="title" type="text" value="@title" />
+
+        <button type="submit" class="btn btn-sm btn-primary">변경 전송</button>
+    </form>
 </div>
