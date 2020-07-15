@@ -1,4 +1,4 @@
-﻿using MySql.Data.MySqlClient;
+﻿using MyWeb.Lib.DataBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,11 +39,9 @@ SELECT
     ,@email
     ,@password
 ";
-            using (var conn = new MySqlConnection("Server=192.168.0.200;Port=3307;Database=myweb;Uid=myweb;Pwd=study2020!!;"))
+            using (var db = new MySqlDapperHelper())
             {
-                conn.Open();
-
-                return Dapper.SqlMapper.Execute(conn, sql, this);
+                return db.Execute(sql, this);
             }
         }
 
@@ -66,11 +64,9 @@ WHERE
 ";
             UserModel user;
 
-            using (var conn = new MySqlConnection("Server=192.168.0.200;Port=3307;Database=myweb;Uid=myweb;Pwd=study2020!!;"))
+            using (var db = new MySqlDapperHelper())
             {
-                conn.Open();
-
-                user = Dapper.SqlMapper.QuerySingleOrDefault<UserModel>(conn, sql, this);
+                user = db.QuerySingle<UserModel>(sql, this);
             }
 
             if (user == null)

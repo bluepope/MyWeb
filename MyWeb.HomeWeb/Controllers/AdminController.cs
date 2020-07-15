@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using MySql.Data.MySqlClient;
 using MyWeb.HomeWeb.Models.Login;
 
 namespace MyWeb.HomeWeb.Controllers
