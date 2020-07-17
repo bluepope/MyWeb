@@ -18,6 +18,9 @@ namespace MyWeb.Lib.DataBase
 
         public void BeginTransaction()
         {
+            if (_conn.State != System.Data.ConnectionState.Open)
+                _conn.Open();
+
             _trans = _conn.BeginTransaction();
         }
 
@@ -44,7 +47,7 @@ namespace MyWeb.Lib.DataBase
 
         public int Execute(string sql, object param)
         {
-            return Dapper.SqlMapper.Execute(_conn, sql, param);
+            return Dapper.SqlMapper.Execute(_conn, sql, param, _trans);
         }
 
 
