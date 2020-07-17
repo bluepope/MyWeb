@@ -1,4 +1,4 @@
-﻿using MySql.Data.MySqlClient;
+﻿using MyWeb.Lib.DataBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +14,9 @@ namespace MyWeb.HomeWeb.Models
 
         public static List<TicketModel> GetList(string status)
         {
-            using (var conn = new MySqlConnection("Server=192.168.0.200;Port=3307;Database=myweb;Uid=myweb;Pwd=study2020!!;"))
+            
+            using (var db = new MySqlDapperHelper())
             {
-                conn.Open();
-
                 string sql = @"
 SELECT
 	A.ticket_id
@@ -28,25 +27,38 @@ FROM
 WHERE
 	A.status = @status
 ";
-                return Dapper.SqlMapper.Query<TicketModel>(conn, sql, new { status = status }).ToList();
+                return db.Query<TicketModel>(sql, new { status = status });
             }
         }
 
         public int Update()
         {
-            string sql = @"
+            using (var db = new MySqlDapperHelper())
+            {
+                db.BeginTransaction();
+
+                try
+                {
+                    int r = 0;
+
+                    string sql = @"
 UPDATE t_ticket
 SET
     title = @title
 WHERE
 	ticket_id = @ticket_id
 ";
+                    r += db.Execute(sql, this);
 
-            using (var conn = new MySqlConnection("Server=192.168.0.200;Port=3307;Database=myweb;Uid=myweb;Pwd=study2020!!;"))
-            {
-                conn.Open();
+                    db.Commit();
 
-                return Dapper.SqlMapper.Execute(conn, sql, this);
+                    return r;
+                }
+                catch(Exception ex)
+                {
+                    db.Rollback();
+                    throw ex;
+                }
             }
         }
     }

@@ -1,0 +1,57 @@
+﻿@using System.Security.Claims
+@model BoardModel
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered no-wrap">
+                        <colgroup>
+                            <col style="width:100px" />
+                            <col style="width:auto" />
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th>제목</th>
+                                <td>@Model.Title</td>
+                            </tr>
+                            <tr>
+                                <th>내용</th>
+                                <td>@Html.Raw(Model.Contents)</td>
+                            </tr>
+                            <tr>
+                                <th>작성자</th>
+                                <td>@Model.Reg_Username (@Model.Reg_Date.ToString("yyyy-MM-dd"))</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="text-right">
+                    @if (Model.Reg_User == Convert.ToUInt32(User.FindFirstValue(ClaimTypes.NameIdentifier)))
+                    {
+                        <button id="btnU" class="btn btn-sm btn-primary">수정</button>
+                        <button id="btnD" class="btn btn-sm btn-danger">삭제</button>
+                        
+                        <form id="form1" method="post" action="/home/boardEdit">
+                            <input type="hidden" name="idx" value="@Model.Idx" />
+                            <input type="hidden" name="type" value="" />
+                        </form>
+
+                        <script>
+                            $("#btnU").click(function () {
+                                $("#form1 input[name=type]").val("U");
+                                $("#form1").submit();
+                            });
+
+                            $("#btnD").click(function () {
+                                $("#form1 input[name=type]").val("D");
+                                $("#form1").submit();
+                            });
+                        </script>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
