@@ -25,7 +25,11 @@ namespace MyWeb.HomeWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            //System.Text.Json 쓰지 않고 -> Newtonsoft.JsonConverter
+            services.AddControllersWithViews().AddNewtonsoftJson(options => {
+                //camelcase 강제적용 해제
+                options.SerializerSettings.ContractResolver = null;
+            });
 
             services.AddAuthentication(options =>
             {

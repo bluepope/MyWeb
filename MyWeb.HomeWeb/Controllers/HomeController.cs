@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -33,11 +34,12 @@ namespace MyWeb.HomeWeb.Controllers
             return View(TicketModel.GetList(status));
         }
 
-        public IActionResult TicketChange(TicketModel model)
+        public IActionResult TicketChange([FromBody]TicketModel model)
         {
             model.Update();
 
-            return Redirect("/home/ticketList"); //Json(new { msg = "OK" });
+            //return Redirect("/home/ticketList"); 
+            return Json(model);
         }
 
         public IActionResult BoardList(string search)
