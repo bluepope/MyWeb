@@ -9,6 +9,9 @@
         title = Model[0].Title;
     }
 }
+<!--Axios CDN-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -102,10 +105,70 @@
 </div>
 
 <div>
-    <form id="form1" method="post" action="/home/ticketchange">
-        <input name="ticket_id" type="text" value="@ticket_id" />
-        <input name="title" type="text" value="@title" />
+    <div>
+        <input id="ticket_id" type="text" value="@ticket_id" />
+        <input id="title" type="text" value="@title" />
 
-        <button type="submit" class="btn btn-sm btn-primary">변경 전송</button>
-    </form>
+        <button id="btn1" type="button" class="btn btn-sm btn-primary">변경 전송</button>
+    </div>
+    <script>
+        $("#btn1").click(function () {
+            var ticket_id = $("#ticket_id").val();
+            var title = $("#title").val();
+
+            /*
+            //1. 순수 js
+            var xhr = new XMLHttpRequest();
+            xhr.open("post", "/home/TicketChange", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        alert("저장 성공");
+                        location.reload();
+                    }
+                }
+            }
+            xhr.send("ticket_id=" + ticket_id + "&title=" + decodeURIComponent(title));
+            //1.순수 js 끝
+            */
+
+            /*
+            console.log("시작");
+            //2. jquery ajax 이용
+            $.ajax({
+                type: "POST",
+                url: "/home/TicketChange",
+                dataType: "json",
+                data: {
+                    model: {
+                        "ticket_id": ticket_id,
+                        "title": title
+                    },
+                    num: 1234
+                },
+                success: function (data) {
+                    alert(data.msg);
+                    location.reload();
+                },
+                error: function (xhr) {
+                    alert(xhr.responseText);
+                }
+            });
+            console.log("끝");
+            */
+
+            //3. Axios 요청
+            axios.post("/home/TicketChange", {
+                "ticket_id": ticket_id,
+                "title": title
+            }).then(function (response) {
+                alert(response.data.Title);
+                location.reload();
+            }).catch(function (xhr) {
+                alert(xhr.responseText);
+            });
+        });
+
+    </script>
 </div>
