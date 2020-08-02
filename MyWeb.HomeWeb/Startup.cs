@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MyWeb.HomeWeb.Hubs;
 using MyWeb.HomeWeb.Services;
 
 namespace MyWeb.HomeWeb
@@ -26,10 +27,14 @@ namespace MyWeb.HomeWeb
         public void ConfigureServices(IServiceCollection services)
         {
             //System.Text.Json 쓰지 않고 -> Newtonsoft.JsonConverter
-            services.AddControllersWithViews().AddNewtonsoftJson(options => {
+            services
+                .AddControllersWithViews()
+                .AddNewtonsoftJson(options => {
                 //camelcase 강제적용 해제
                 options.SerializerSettings.ContractResolver = null;
             });
+
+            services.AddSignalR();
 
             services.AddAuthentication(options =>
             {
@@ -71,6 +76,8 @@ namespace MyWeb.HomeWeb
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapHub<ChatHub>("/chathub");
             });
         }
     }

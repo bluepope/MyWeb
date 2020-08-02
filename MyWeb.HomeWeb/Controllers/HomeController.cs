@@ -116,6 +116,11 @@ namespace MyWeb.HomeWeb.Controllers
             return Redirect("/home/boardlist");
         }
 
+        public IActionResult Chat()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
