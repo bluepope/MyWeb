@@ -111,6 +111,10 @@
 
         <button id="btn1" type="button" class="btn btn-sm btn-primary">변경 전송</button>
     </div>
+
+    <div>
+        <button id="btn2" type="button" class="btn btn-sm btn-primary">WebApi Test</button>
+    </div>
     <script>
         $("#btn1").click(function () {
             var ticket_id = $("#ticket_id").val();
@@ -167,6 +171,25 @@
                 location.reload();
             }).catch(function (xhr) {
                 alert(xhr.responseText);
+            });
+        });
+
+        $("#btn2").click(function () {
+            //2. jquery ajax 이용
+            $.ajax({
+                type: "delete",
+                url: "https://localhost:44371/weatherforecast",
+                dataType: "json",
+                data: {
+                },
+                success: function (data) {
+                    console.log("성공");
+                    console.log(data);
+                },
+                error: function (xhr) {
+                    console.log("실패");
+                    console.log(xhr.responseJSON.message);
+                }
             });
         });
 
